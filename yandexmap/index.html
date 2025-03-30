@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Построение маршрута</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=7f0f8446-0e30-4066-9f7e-fdbe6aabcafa&lang=ru_RU"></script>
+    <script type="text/javascript">
+        let myMap, multiRoute;
+
+        ymaps.ready(init);
+
+        function init() {
+            myMap = new ymaps.Map("map", {
+                center: [55.76, 37.64],
+                zoom: 7,
+                controls: ['ZoomControl']
+            });
+        }
+
+        function makeRoute() {
+            const from = document.getElementById("from").value.trim();
+            const to = document.getElementById("to").value.trim();
+
+            if (!from || !to) {
+                alert("Введите адреса!");
+                return;
+            }
+
+            // Удаляем предыдущий маршрут
+            if (multiRoute) {
+                myMap.geoObjects.remove(multiRoute);
+            }
+
+            // Создаем маршрут
+            multiRoute = new ymaps.multiRouter.MultiRoute(
+                {
+                    referencePoints: [from, to],
+                    params: { routingMode: 'auto' }
+                },
+                {
+                    boundsAutodisplay: true,
+                    // Автоматически подстраиваем карту под маршрут
+                    boundsAutoApply: true 
+                }
+            );
+
+            // Обработка ошибок маршрутизации
+            multiRoute.model.events.add('requestsuccess', function () {
+                const activeRoute = multiRoute.getActiveRoute();
+                if (!activeRoute) {
+                    alert("Маршрут не найден. Проверьте адреса.");
+                }
+            });
+
+            multiRoute.model.events.add('requesterror', function () {
+                alert("Ошибка при построении маршрута");
+            });
+
+            myMap.geoObjects.add(multiRoute);
+        }
+    </script>
+</head>
+<body>
+    <div id="panel">
+        <input type="text" id="from" placeholder="Откуда (например, Москва, Красная площадь)">
+        <input type="text" id="to" placeholder="Куда (например, Москва, Кремль)">
+        <button onclick="makeRoute()">Построить маршрут</button>
+    </div>
+    <div id="map"></div>
+</body>
+</html>

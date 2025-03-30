@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Форма для заполнения</title>
+  <!-- Подключение внешнего файла CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Форма для заполнения</h1>
+  
+  <form action="#" method="post">
+    <!-- Блок с контактной информацией -->
+    <fieldset>
+      <legend>Контактная информация</legend>
+      
+      <label for="surname">Фамилия:</label>
+      <input type="text" id="surname" name="surname" placeholder="Иванов" required><br><br>
+      
+      <label for="name">Имя:</label>
+      <input type="text" id="name" name="name" placeholder="Иван" required><br><br>
+      
+      <label for="phone">Телефон:</label>
+      <input type="tel" id="phone" name="phone" placeholder="+7 (999) 999-99-99" required><br><br>
+      
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" placeholder="example@mail.ru" required><br><br>
+    </fieldset>
+    
+    <!-- Блок с основной информацией -->
+    <fieldset>
+      <legend>Основные данные</legend>
+      
+      <label for="birthdate">Дата рождения:</label>
+      <input type="date" id="birthdate" name="birthdate" required><br><br>
+      
+      <label for="city">Город:</label>
+      <input type="text" id="city" name="city" placeholder="Москва" required><br><br>
+      
+      <label for="region">Область/Регион:</label>
+      <input type="text" id="region" name="region" placeholder="Московская область"><br><br>
+      
+      <label for="gender">Пол:</label>
+      <select id="gender" name="gender" required>
+        <option value="мужской">Мужской</option>
+        <option value="женский">Женский</option>
+      </select><br><br>
+      
+      <label for="marital-status">Семейное положение:</label>
+      <select id="marital-status" name="marital-status" required>
+        <option value="в браке">В браке</option>
+        <option value="в разводе">В разводе</option>
+        <option value="холост/не замужем">Холост/Не замужем</option>
+      </select><br><br>
+      
+      <label for="education">Образование:</label>
+      <select id="education" name="education">
+        <option value="среднее">Среднее</option>
+        <option value="высшее">Высшее</option>
+        <option value="другое">Другое</option>
+      </select><br><br>
+      
+      <label for="occupation">Сфера деятельности:</label>
+      <input type="text" id="occupation" name="occupation" placeholder="IT, медицина и т.п."><br><br>
+      
+      <label for="hobby">Хобби:</label>
+      <input type="text" id="hobby" name="hobby" placeholder="Спорт, музыка и т.д."><br><br>
+      
+      <div>
+        <label for="spouse">Супруг(а):</label>
+        <input type="checkbox" id="spouse" name="spouse">
+        
+        <label for="children">Дети:</label>
+        <input type="checkbox" id="children" name="children">
+        
+        <label for="work">Работа:</label>
+        <input type="checkbox" id="work" name="work">
+      </div>
+    </fieldset>
+    
+    <!-- Кнопка отправки формы -->
+    <input type="submit" value="Отправить">
+  </form>
+
+  <script>
+    document.getElementById("education")
+  </script>
+
+</body>
+</html>
